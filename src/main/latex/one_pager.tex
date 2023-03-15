@@ -1,0 +1,64 @@
+%! Author = florian
+%! Date = 3/15/23
+
+% Preamble
+\documentclass[11pt,journal]{IEEEtran}
+
+% Packages
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{libertine}
+\usepackage{libertinust1math}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage{graphicx}
+
+\title{Making CI Open Source}
+\author{
+    Haas, Fabian\\
+    \and
+    Weingartshofer, Florian
+}
+\date{\today}
+
+% Document
+\begin{document}
+    \maketitle
+
+
+    \section{Introduction}\label{sec:introduction}
+    The aim of this paper is to find alternatives to SonarSources SonarCloud product.
+    SonarQube is open source and SonarCloud is based on that, there are many limiting factors for SonarQube, such as not having the possibility to use it in pull requests.
+    So only the core is open source, and it is hard to integrate it into existing CI/CD pipelines, such as GitHub Actions.
+
+    \section{Motivation}\label{sec:motivation}
+    As described in\ \ref{sec:introduction} SonarQube only offers limited functionality in its open source variant.
+    SonarSource offers a free tier for open source projects, but not for private git repositories.
+    This limits organizations that are not ready to publish their source code on a git host.
+    These organizations would have to pay for the paid tier, even when they intend to publish their source code later on.
+
+    \section{Tools to Investigate}\label{sec:tools-to-investigate}
+    All tools that are investigated should be open source and free to use.
+    They should replace specific SonarQube functions, such as code style or security vulnerability scans.
+    The following tools will be investigated and evaluated.
+    \begin{itemize}
+        \item Checkstyle: A tool to check if code conforms to a common style guide
+        \item SpotBugs: A static analysis tool that checks code for common bug patterns, such as missing null checks
+        \item ErrorProne: Another static analysis tool, which also checks for common bug patterns
+        \item Dependency Check: Dependency vulnerability scanner endorsed by OWASP
+        \item Other tools could be Jenkins CI Build Server or GitHub DependaBot
+    \end{itemize}
+
+    \section{Result}\label{sec:result}
+    The result should be a guide on how to use these tools in a CI environment.
+    Furthermore, should the tools be evaluated and their strengths and shortcomings should be briefly described.
+
+    \section{Project Team}\label{sec:project-team}
+    \begin{itemize}
+        \item Fabian Haas
+        \item Florian Weingartshofer
+    \end{itemize}
+\end{document}
