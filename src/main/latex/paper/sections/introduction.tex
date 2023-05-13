@@ -1,3 +1,20 @@
 \section{Introduction}\label{sec:introduction}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits.
+
+The primary objective of this paper is to identify open-source alternatives to SonarSource's SonarCloud product.
+SonarQube, the open-source foundation upon which SonarCloud is built, presents several limitations, such as the lack of support for pull request integration and the difficulty of integration into existing CI/CD pipelines, including GitHub Actions.
+While SonarSource provides a free tier for open-source projects, this does not extend to private Git repositories, posing a challenge for organizations unwilling or unable to publicly host their source code.
+These organizations are compelled to subscribe to the paid tier, an expense they may not be prepared to bear, particularly if they intend to publish their source code in the future.
+
+To address these issues, we investigate a selection of open-source tools that are free to use and that could potentially replace specific SonarQube functions such as code style enforcement and security vulnerability scans.
+
+The following tools will be investigated:
+\begin{itemize}
+    \item \textit{Checkstyle:} A tool to ensure code conforms to a common style guide.
+    \item \textit{SpotBugs:} A static analysis tool that checks code for common bug patterns, such as missing null checks.
+    \item \textit{ErrorProne:} Another static analysis tool that also checks for common bug patterns.
+    \item \textit{Dependency Check:} An OWASP-endorsed vulnerability scanner for dependencies.
+    \item \textit{Gitleaks:} A tool for detecting and preventing hardcoded secrets like passwords, API keys, and tokens.
+    \item Other potential alternatives include the Jenkins CI Build Server and GitHub's DependaBot.
+\end{itemize}
+
+Through this investigation, we aim to provide a comprehensive overview of open-source tools that can supplement or replace SonarQube's functionality, thereby offering greater flexibility and cost-effectiveness for a wider range of development environments.
