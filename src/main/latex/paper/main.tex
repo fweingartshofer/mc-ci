@@ -1,0 +1,40 @@
+\documentclass[conference]{IEEEtran}
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{libertine}
+\usepackage{libertinust1math}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage{graphicx}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\title{Conference Paper Title*\\
+{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
+should not be used}
+}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Fabian Haas}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Florian Weingartshofer}
+}
+
+\begin{document}
+    \maketitle
+
+    \selectlanguage{english}
+
+    \input{sections/abstract}
+
+    \input{sections/introduction}
+
+    ~\nocite{*}
+    \bibliographystyle{IEEEtran}
+    \bibliography{main}
+
+\end{document}
