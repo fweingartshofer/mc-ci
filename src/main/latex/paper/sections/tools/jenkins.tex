@@ -1,0 +1,80 @@
+\subsection{Jenkins}\label{subsec:jenkins}
+Jenkins is an automation server that is open-source and enables developers to automate different aspects of the software development process.
+It is used for implementing continuous integration, continuous delivery, and continuous deployment of software applications.\cite{jenkins-docs}
+
+Developers can define a pipeline of tasks in Jenkins that are executed automatically whenever changes are made to the code.
+This pipeline can consist of various tasks such as compiling code, running automated tests, and deploying the application.
+
+Jenkins is incredibly flexible and adaptable.
+It can be integrated with a wide range of tools and plugins to automate various parts of the development process.
+
+GitHub Actions is a competing tool developed by GitHub that is not open-source and directly competes with Jenkins.
+
+\subsubsection{Features}\label{subsubsec:jenkins-features}
+Some of the key features offered by Jenkins include:
+
+\begin{itemize}
+    \item\textbf{Extensibility}: Jenkins offers a wide plugin ecosystem and for many technologies there are already plugins available, such as GitHub, Gradle, Maven and JaCoCo.
+    \item\textbf{Pipelines}: There are multiple ways in Jenkins to describe the build steps necessary to test, build or deploy a project.
+    One such way is the free style project were the SCM(Software Configuration Management) and the build steps can be easily configured using a UI\@.
+    Another, more powerful, way is using Pipelines.
+    It is a suite of plugins that enables developers to create continuous integration and delivery pipelines.
+    There are two different ways to create a Jenkins Pipeline: scripted Pipelines and declarative Pipelines.
+    Declarative Pipelines offer a clean syntax and are easy to read, but they do not allow Groovy code or Java API references.
+    Scripted Pipelines on the other hand, are written using Groovy, this helps to build more complex Pipelines.\cite{jenkins-docs}
+    \item\textbf{Distributed Builds}: Jenkins can distribute work across multiple machines, helping drive builds, tests, and deployments across multiple platforms faster.\cite{jenkins-docs}
+\end{itemize}
+
+\subsubsection{Test Setup}\label{subsubsec:testing-jenkins}
+The test setup consists of a Gradle Java Project with a number of unit tests and JaCoCo support.
+It is hosted as a private git repository on GitHub.
+That way it is possible to test the GitHub integration with Jenkins.
+
+Before creating a Pipeline a Jenkins instance is needed.
+Jenkins offers many ways to install the server.
+One way to get a running Jenkins instance is by deploying a Docker image.
+To ease the creation of the Docker container we build a custom Docker image with Jenkins, as seen in\ \ref{fig:jenkins-docker,fig:jenkins-plugins}.
+The resulting Docker container is not completely setup, that can be done after running the image, to add admin-users or install more plugins.
+
+\begin{figure}[h]
+    \caption{Jenkins Dockerfile}
+    \lstinputlisting[language=docker,basicstyle=\tiny,label={lst:jenkins-docker}]{../../jenkins/Dockerfile}
+    \label{fig:jenkins-docker}
+\end{figure}
+
+\begin{figure}[h]
+    \caption{Jenkins Plugins}
+    \lstinputlisting[basicstyle=\tiny,label={lst:jenkins-plugins}]{../../jenkins/plugins.txt}
+    \label{fig:jenkins-plugins}
+\end{figure}
+
+After Jenkins is set up a Pipeline can be created in the Jenkins UI, for more information on that see the Jenkins Documentation\footnote{\url{https://www.jenkins.io/doc/pipeline/tour/hello-world/}}.
+We created a Pipeline script to build Gradle project on a private GitHub repository, the Pipeline can be seen here\ \ref{fig:jenkins-declarative-pipeline}.
+Jenkins allows users to create confidential credentials specifically for pipelines, and the GitHub plugin provides a credential type for GitHub.
+This enables users to access a private repository by creating a GitHub access token with read permissions on the repository.
+The resulting credentials can be referenced with the \texttt{credentialsId} option.
+
+The \texttt{post} block declares an action that is run after the stage, in this case the \texttt{Gradle Test} Stage.
+It uses the JaCoCo plugin to display a test-coverage report on the Jenkins UI.
+
+\begin{figure}[h]
+    \caption{Jenkins Declarative Pipeline}
+    \lstinputlisting[basicstyle=\tiny,label={lst:jenkins-declarative-pipeline}]{../../jenkins/Jenkinsfile}
+    \label{fig:jenkins-declarative-pipeline}
+\end{figure}
+
+\subsubsection{Comparison to GitHub Actions}\label{subsubsec:comparison-to-github-actions}
+The following will compare our experience with Jenkins with GitHub Actions.
+
+GitHub Actions offers an easy way to create a pipeline by using yaml files and so called ``Actions''.
+These Actions are similar to plugins as they can be used to extend the functionality of GitHub Actions.
+
+Both, Jenkins and GitHub, are easy to configure, but Jenkins offers way more ways to configure a pipeline either by using scripted Pipelines, declarative Pipelines or with Wolox CI\footnote{\url{https://github.com/Wolox/wolox-ci}} a library to build Pipelines with yaml.
+Since Jenkins offers many ways to configure Pipelines, it is easier to create a running pipeline for build, test and deployment.
+
+Jenkins and GitHub have extensive ecosystems and thriving communities that develop plugins and actions, respectively.
+According to the official Jenkins plugin page\footnote{\url{https://plugins.jenkins.io/}}, there are over 1800 plugins available for Jenkins.
+On the other hand, GitHub offers over 18520 actions, as listed on the GitHub marketplace page\footnote{\url{https://github.com/marketplace?page=1&type=actions}}.
+However, it should be noted that not all of these actions can be used, are being used, or are even official GitHub Actions, as this number includes all repositories that are tagged with the term ``actions''.
+
+In summary, the choice between Jenkins and GitHub Actions depends on your specific needs and preferences.
