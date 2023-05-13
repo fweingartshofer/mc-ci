@@ -1,0 +1,7 @@
+git:latest
+github:latest
+github-oauth:latest
+gradle:latest
+junit:latest
+jacoco:latest
+blueocean:latest

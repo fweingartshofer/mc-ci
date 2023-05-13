@@ -10,9 +10,23 @@
 \usepackage{hyperref}
 \usepackage[a4paper, total={6in, 9in}]{geometry}
 \usepackage{graphicx}
+\usepackage{blindtext}
+\usepackage{color}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
 T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\lstdefinelanguage{docker}{
+    keywords={FROM, RUN, COPY, ADD, ENTRYPOINT, CMD,  ENV, ARG, WORKDIR, EXPOSE, LABEL, USER, VOLUME, STOPSIGNAL, ONBUILD, MAINTAINER},
+    keywordstyle=\bfseries,
+    identifierstyle=\color{black},
+    sensitive=false,
+    comment=[l]{\#},
+    commentstyle=\ttfamily,
+    stringstyle=\ttfamily,
+    morestring=[b]',
+    morestring=[b]"
+}
 
 \title{Making CI Open Source}
 

@@ -1,0 +1,33 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Checkout') {
+      steps {
+        git branch: 'main',
+            credentialsId: '***',
+            url: 'https://github.com/eddie-energy/eddie.git'
+      }
+    }
+
+    stage('Gradle Test') {
+      steps {
+        sh './gradlew test'
+      }
+    post {
+      success {
+          jacoco(
+            execPattern: '**/build/jacoco/*.exec',
+            classPattern: '**/build/classes/java/main',
+            sourcePattern: '**/src/main'
+          )
+        }
+      }
+    }
+    stage('Gradle Build') {
+      steps {
+        sh './gradlew build'
+      }
+    }
+  }
+}
