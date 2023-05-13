@@ -2,7 +2,7 @@ name: gitleaks
 on:
   push:
     branches: 
-     - 'gitleaks'
+     - gitleaks
 jobs:
   scan:
     name: gitleaks
