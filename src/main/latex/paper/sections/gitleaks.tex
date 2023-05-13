@@ -1,1 +1,42 @@
 \section{Gitleaks}\label{sec:gitleaks}
+
+Gitleaks is a robust open-source tool specifically designed to audit Git repositories for potential leaks of secrets.
+These may include passwords, API keys, and other sensitive data.
+
+Gitleaks conducts its audit by scrutinizing commit histories and pull requests via configurable rules that are defined in YAML files.
+Each rule comprises a regular expression and a description of the secret that is being sought.
+Listing ~\ref{lst:gl-github-app-token-rule} presents an example of such a rule, designed to search for GitHub App tokens, which serve to authenticate GitHub Apps.
+
+In situations where secrets do not conform to a specific pattern, Gitleaks accommodates the use of entropy-based rules.
+Entropy, a measure of the randomness of a string, is often higher for passwords and other secrets compared to regular strings.
+These rules are defined by stating a minimum entropy value, used to ascertain whether a string could potentially be a secret.
+
+\lstinputlisting[basicstyle=\scriptsize, caption=Gitleaks rule for GitHub App tokens, label={lst:gl-github-app-token-rule}]{./assets/gitleaks/github-app-token-rule.yaml}
+
+Gitleaks includes a comprehensive set of default rules for common secrets and service providers, such as \texttt{AWS access keys}, \texttt{SSH private keys}, and \texttt{Slack tokens}.
+Although these rules are sufficient for most use cases, they can be supplemented with custom rules as needed.
+
+Beyond the rules, Gitleaks provides a plethora of configuration options, permitting meticulous control over the scanning process.
+These options include specifying which branches to scan or excluding certain files or directories from the scan.
+Gitleaks can also be set to scan only the latest commit or the entire commit history, a feature particularly beneficial when scanning a repository for the first time.
+
+Gitleaks is versatile enough to be used as a standalone tool, a pre-commit hook, or as a workflow step in CI/CD pipelines, such as GitHub Actions.
+
+When employed as a standalone tool, the \texttt{detect} command enables the scanning of repositories, directories, and files, whereas the \texttt{protect} command is utilized to scan uncommitted changes in a Git repository.
+
+\subsection{Gitleaks in CI/CD pipelines}\label{subsec:gitleaks-cicd}
+
+Gitleaks can be integrated as a part of Continuous Integration/Continuous Deployment (CI/CD) pipelines to ensure that no secrets are leaked with each new code commit.
+Automated Gitleaks scans within the pipeline can prevent the accidental exposure of sensitive data, thereby enhancing the security of the development process.
+For instance, in GitHub Actions, Gitleaks can be added as a step in the workflow YAML file.
+
+\subsection{Gitleaks as a Pre-commit Hook}\label{subsec:gitleaks-precommit}
+
+In a proactive measure to avoid committing sensitive information, Gitleaks can be set up as a pre-commit hook in Git.
+This configuration prompts Gitleaks to scan changes for potential secrets before each commit.
+If a suspected secret is found, the commit will be blocked, and the user will be alerted, thereby preventing the inadvertent inclusion of sensitive data in the commit.
+
+\subsection{License}\label{subsec:gitleaks-license}
+
+Gitleaks is licensed under the permissive MIT License.
+This license allows for its use, modification, and distribution, both for private and commercial purposes, provided that the license and copyright notice are included in copies or substantial portions of the software.

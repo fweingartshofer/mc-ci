@@ -1,0 +1,7 @@
+[[rules]]
+description = "GitHub App Token"
+id = "github-app-token"
+regex = '''(ghu|ghs)_[0-9a-zA-Z]{36}'''
+keywords = [
+"ghu_","ghs_",
+]
