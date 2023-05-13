@@ -1,4 +1,4 @@
-\section{Gitleaks}\label{sec:gitleaks}
+\subsection{Gitleaks}\label{subsec:gitleaks}
 
 Gitleaks is a robust open-source tool specifically designed to audit Git repositories for potential leaks of secrets.
 These may include passwords, API keys, and other sensitive data.
@@ -24,19 +24,33 @@ Gitleaks is versatile enough to be used as a standalone tool, a pre-commit hook,
 
 When employed as a standalone tool, the \texttt{detect} command enables the scanning of repositories, directories, and files, whereas the \texttt{protect} command is utilized to scan uncommitted changes in a Git repository.
 
-\subsection{Gitleaks in CI/CD pipelines}\label{subsec:gitleaks-cicd}
+\subsubsection{Gitleaks in CI/CD pipelines}\label{subsubsec:gitleaks-cicd}
 
 Gitleaks can be integrated as a part of Continuous Integration/Continuous Deployment (CI/CD) pipelines to ensure that no secrets are leaked with each new code commit.
 Automated Gitleaks scans within the pipeline can prevent the accidental exposure of sensitive data, thereby enhancing the security of the development process.
 For instance, in GitHub Actions, Gitleaks can be added as a step in the workflow YAML file.
 
-\subsection{Gitleaks as a Pre-commit Hook}\label{subsec:gitleaks-precommit}
+Gitleaks also offers a GitHub Action that makes it easy to integrate Gitleaks into GitHub workflows.
+However, this action is only open-core and requires a paid license to be used outside of personal repositories.
+
+\subsubsection{Gitleaks as a Pre-commit Hook}\label{subsubsec:gitleaks-precommit}
 
 In a proactive measure to avoid committing sensitive information, Gitleaks can be set up as a pre-commit hook in Git.
 This configuration prompts Gitleaks to scan changes for potential secrets before each commit.
 If a suspected secret is found, the commit will be blocked, and the user will be alerted, thereby preventing the inadvertent inclusion of sensitive data in the commit.
 
-\subsection{License}\label{subsec:gitleaks-license}
+\subsubsection{License}\label{subsubsec:gitleaks-license}
 
 Gitleaks is licensed under the permissive MIT License.
 This license allows for its use, modification, and distribution, both for private and commercial purposes, provided that the license and copyright notice are included in copies or substantial portions of the software.
+
+\subsubsection{Conclusion}\label{subsubsec:gitleaks-conclusion}
+
+In conclusion, Gitleaks stands as a valuable, open-source tool in the prevention of inadvertent leakage of sensitive data within Git repositories.
+Its extensive rule sets and flexible configurations provide a critical line of defense against secret leaks.
+When integrated into CI/CD pipelines, Gitleaks diligently scans new code commits and alerts to the presence of any sensitive information.
+However, it's crucial to note that Gitleaks primarily serves as a detection tool within these environments, and cannot inherently prevent leaks.
+
+The prevention of secret leaks is truly effective when Gitleaks is utilized as a pre-commit hook.
+In the absence of universal adoption of the pre-commit hook among developers, Gitleaks can only notify you of secrets that have already been committed.
+Therefore, we recommend to enforce the use of the Gitleaks pre-commit hook as a standard part of the development workflow in repositories that contain sensitive data.
