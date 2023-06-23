@@ -9,3 +9,31 @@ Some key aspects of Checkstyle include:
     \item\textbf{Limited to Java}: Checkstyle is specifically designed for Java and does not support other programming languages.
 \end{itemize}
 
+\subsubsection{Test Setup}
+Setting up checkstyle is rather easy.
+It only has to be included into the build script.
+In this case gradle with the groovy DSL was used as seen in figure\ \ref{fig:checkstyle-gradle}~\cite{gradle-checkstyle}.
+
+\begin{figure}[h]
+    \caption{Checkstyle build.gradle}
+    \lstinputlisting[basicstyle=\tiny,label={lst:checkstyle-gradle}]{../../checkstyle/build.gradle}
+    \label{fig:checkstyle-gradle}
+\end{figure}
+
+This automatically adds the checkstyle task, that can be executed by running \texttt{gradle checkstyleMain}.
+
+\subsubsection{Comparison to SonarQube}
+The main difference between Checkstyle and SonarQube is that it Checkstyle focuses on finding misformatted code, while SonarQube only finds code smells.
+This also means one can configure Checkstyle in a way that it forces formatting, which SonarQube will identify as a code smell.
+
+Checkstyle is not just a replacement for some SonarQube features, but even complements them, since they intend to solve different problems.
+Checkstyle is a tool that only focuses on formatting issues, this is not a feature that SonarQube inherently implements.
+
+SonarQube implements their own rules, which are called code smells.
+Code smells sometimes overlap with formatting issues, but this does not have to be the case.
+Code smells are indicators that show deeper problems with the code, for example god classes or procedural programming in an OOP language.
+For example duplicated code, long methods or classes, and excessive method parameters are code smells.
+Important to note is that code smells are not necessary bugs or semantic errors.
+Code with many smells can still run perfectly fine, but it might be harder to read or maintain.
+
+This makes formatting and code smells two distinct problems, that sometimes can overlap.
