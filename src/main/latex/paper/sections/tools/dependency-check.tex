@@ -1,0 +1,33 @@
+\section{OWASP Dependency Check}\label{sec:owasp-dependency-check}
+
+OWASP Dependency Check is a tool for finding known vulnerabilities in project dependencies.
+It is developed by OWASP, the Open Worldwide Application Security Project,
+a non-profit online community that produces freely-available knowledge like articles,
+methodologies, documentation, tools, and technologies in the field of web application security ~\cite{owasp-about}.
+
+Dependency check utilizes known vulnerabilities to find vulnerable dependencies.
+These known vulnerabilities are sourced from an open database called the National Vulnerability Database (NVD) that is maintained
+by the National Institute of Standards and Technology (NIST) ~\cite{nvd}.
+
+Dependency Check supports multiple programming languages and package managers through the use of \emph{analyzers}.
+When an analyzer is run on a project it will scan the project for dependencies and then compare them to the NVD database.
+If a dependency is found that is vulnerable,
+evidence of the vulnerability is collected (vendor, product and version) and a report is generated ~\cite{owasp-dependency-check-work}.
+
+\subsection{Usage}\label{subsec:depencency-check-usage}
+
+Dependency Check can be used as a command line tool or as a plugin for build tools like Gradle and Maven.
+The command line tool can be used for all supported programming languages and package managers, while the plugins are limited to the build tool they are made for.
+
+Using the command line tool is as simple as running \texttt{\scriptsize dependency-check.sh --project "My App Name" --scan "java/application/lib"}, where \texttt{\scriptsize--project} is the name of the project and \texttt{\scriptsize--scan} is the path to the files that will be scanned.
+
+There is also a Jenkins plugin available that can be used to integrate Dependency Check into a Jenkins Pipeline,
+automatically generating a report and failing the build if a vulnerability is found.
+
+\subsubsection{Conclusion}\label{subsubsec:depencency-check-conclusion}
+
+While it is simple to use and certainly a useful tool,
+most modern build tools and IDEs already have a built-in dependency checker that reports vulnerabilities.
+This makes it redundant to use Dependency Check in most cases, though it is a different story if dependency checking should be integrated into a CI/CD pipeline.
+In this case, Dependency Check is a good alternative to SonarQube's dependency checking.
+
