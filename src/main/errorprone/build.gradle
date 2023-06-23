@@ -1,0 +1,7 @@
+plugins {
+    id 'net.ltgt.errorprone' version '3.0.1'
+}
+
+dependencies {
+    compileOnly 'com.google.errorprone:error_prone_core:2.18.0'
+}
