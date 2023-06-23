@@ -1,0 +1,51 @@
+%! Author = florian
+%! Date = 6/23/23
+\subsection{ErrorProne}\label{subsec:errorprone}
+Error Prone is a popular Java library that aims to improve the quality and reliability of Java code by detecting and preventing common programming errors.
+It functions as a static analysis tool and compiler plugin, seamlessly integrating with the Java compiler to provide valuable feedback and suggestions during the development process.
+
+Issues are flagged by creating compiler errors with an appropriate message, which contextualizes errors and often include a possible fix.
+Similar to how modern IDEs often suggest a possible fix, before even compiling the source code.
+Error Prone is also able to create patch files with these fixes, that then can be applied by the developers.
+
+Error Prone can be extended by writing plugins.
+The plugins operate directly on the abstract syntax tree, which helps writing powerful plugins.
+The downside of this approach is that writing plugins is not an easy task.
+
+Refaster is a tool that aims to solve this problem.
+It provides an API with before and after templates.
+That way it is easy to create customized plugins for Error Prone.
+
+A similar tool to Error Prone is Spotbugs, which is described in the Subsection\ \ref{subsec:spotbugs}.
+In comparison to Spotbugs, Error Prone offers a more powerful configuration and plugin system, making Error Prone the preferred static analysis tool~\cite{errorprone}.
+
+\subsubsection{Test Setup}
+Error Prone is easy to integrate in existing gradle projects.
+Similar to Checkstyle, which is described in Subsection\ \ref{subsec:checkstyle}.
+The plugin simply has to be included, and it will integrate itself into the \texttt{compileJava}-task.
+The Figure\ \ref{fig:errorprone-gradle} shows the configuration in the \texttt{build.gradle}.
+
+\begin{figure}[h]
+    \caption{Checkstyle build.gradle}
+    \lstinputlisting[basicstyle=\tiny,label={lst:errorprone-gradle}]{../../errorprone/build.gradle}
+    \label{fig:errorprone-gradle}
+\end{figure}
+
+\subsubsection{Nullaway}
+A plugin which should be mentioned is Nullaway.
+It helps developers finding possible NullPointerExceptions in the code, which is still a problem in Java, since there is no real option type, like in \.Net or TypeScript.
+By using Nullaway developers can mitigate the risk of unexpected NullPointerExceptions.
+
+\subsubsection{Comparison to SonarQube}
+Error Prone and Sonar Qube are both static analysis tools, which means they solve the same problems.
+Both have standard bug patterns to find bugs and both can be extended to add functionality.
+
+As seen above, it is easy to add Error Prone to the build process, and it integrates itself directly into the compile task.
+That way it is close to the development cycle, which gives more feedback to the developers.
+
+Both Error Prone and SonarQube offer a plugin system.
+Error Prones offers a number of well known plugins, such as Nullaway, which are often used extensively.
+
+One downside of Error Prone is, that it is limited to the JVM.
+
+In the end, they still can be combined, to offer the biggest coverage of bug patterns possible.
