@@ -1,0 +1,32 @@
+\subsection{SpotBugs}\label{subsec:spotbugs}
+
+SpotBugs is a static analysis tool that checks Java code for common bug patterns, such as missing null checks and deadlocks.
+It categorizes bugs into different types, such as, but not limited to, correctness, bad practice, performance, style, experimental and security.
+Which allows for different levels of severity to be assigned to each bug type ~\cite{spotbugs-docs}.
+
+SpotBugs is the successor of the now abandoned project FindBugs, that was developed by the University of Maryland ~\cite{spotbugs-docs}.
+
+\subsubsection{Setup}
+
+Similar to Checkstyle as seen in section ~\ref{subsubsec:checkstyle-test-setup}, SpotBugs can be easily integrated into a Gradle build script.
+This is shown by figure ~\ref{fig:spotbugs-gradle}, which also uses the groovy DSL.
+
+\begin{figure}[h]
+    \caption{SpotBugs build.gradle}
+    \lstinputlisting[basicstyle=\tiny,label={lst:spotbugs-gradle}]{../../spotbugs/build.gradle}
+    \label{fig:spotbugs-gradle}
+\end{figure}
+
+This automatically adds the spotbugsMain task, that can be executed by running \texttt{gradle spotbugsMain}.
+
+\subsubsection{Comparison to SonarQube}\label{subsubsec:spotbugs-comparison}
+
+While SpotBugs performs a similar task to SonarQubes static analysis, it can only be used for Java code.
+
+It is also hard to find a direct comparison on the bugs they can detect, since SonarQube does not provide a list of all the rules it uses,
+but knowing it supports multiple languages, it is reasonable to assume that it can detect more bugs than SpotBugs.
+
+While setting up SpotBugs is simpler than SonarQube, setting up SonarQube is still not a difficult task and can be done in a few minutes.
+SpotBugs also does not offer many configuration options, while SonarQube allows for a lot of customization and offers a lot more in general.
+
+So if one is only looking for a simple tool to check for bugs in Java code, SpotBugs is a good choice, however if one is looking for a tool that can be used for multiple languages and offers more features, SonarQube would be the better choice.
